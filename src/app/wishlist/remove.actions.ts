@@ -1,0 +1,18 @@
+"use server";
+import axios from "axios";
+import { getMyToken } from "../api/getMyToken";
+
+export async function deleteItem(productId: string) {
+  const token = await getMyToken();
+
+  const { data } = await axios.delete(
+    `https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`,
+    {
+      headers: {
+        token: token as string,
+      },
+    },
+  );
+
+  return data;
+}
